@@ -23,7 +23,7 @@ class Home extends MY_Controller{
         $this->data['categories'] = $categories;
         // echo "<pre>";
         // print_r($newproduct);
-        $total_rows = $this->db->get_where('products',array('status'=>0))->num_rows();
+        $total_rows = $this->db->get_where('products',array('is_delete'=>0))->num_rows();
 
         $this->data['total_rows'] = $total_rows;
         
@@ -61,7 +61,7 @@ class Home extends MY_Controller{
         $segment = intval($segment);
         // echo "<pre>";
         // print_r($segment);
-        $product = $this->db->limit($config['per_page'],$segment)->get_where('products',array('status'=>0))->result();
+        $product = $this->db->limit($config['per_page'],$segment)->get_where('products',array('is_delete'=>0))->result();
         $this->data['product']  = $product;
 
 

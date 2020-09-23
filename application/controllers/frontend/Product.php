@@ -23,7 +23,7 @@ Class Product extends MY_Controller{
         $this->data['publishers'] = $publishers;
         // echo "<pre>";
         // print_r($newproduct);
-        $total_rows = $this->db->get_where('products',array('status'=>0))->num_rows();
+        $total_rows = $this->db->get_where('products',array('is_delete'=>0))->num_rows();
 
         $this->data['total_rows'] = $total_rows;
         
@@ -61,7 +61,7 @@ Class Product extends MY_Controller{
         $segment = intval($segment);
         // echo "<pre>";
         // print_r($segment);
-        $productSearch = $this->db->limit($config['per_page'],$segment)->get_where('products',array('status'=>0))->result();
+        $productSearch = $this->db->limit($config['per_page'],$segment)->get_where('products',array('is_delete'=>0))->result();
         $this->data['productSearch']  = $productSearch;
         $this->data['page_title'] = 'Tìm kiếm sản phẩm';
 		$this->data['temp'] = 'frontend/product/index';
@@ -77,7 +77,7 @@ Class Product extends MY_Controller{
         $this->data['publishers'] = $publishers;
         $this->data['categories'] = $categories;
         // echo "<pre>"; print_r($product);
-        $total_rows = $this->db->get_where('products',array('category_id'=>$id,'status'=>0))->num_rows();
+        $total_rows = $this->db->get_where('products',array('category_id'=>$id,'is_delete'=>0))->num_rows();
 
         $this->data['total_rows'] = $total_rows;
         
@@ -115,7 +115,7 @@ Class Product extends MY_Controller{
         $segment = intval($segment);
         // echo "<pre>";
         // print_r($segment);
-        $productSearch = $this->db->limit($config['per_page'],$segment)->get_where('products',array('category_id'=>$id,'status'=>0))->result();
+        $productSearch = $this->db->limit($config['per_page'],$segment)->get_where('products',array('category_id'=>$id,'is_delete'=>0))->result();
         $this->data['productSearch']  = $productSearch;
         $this->data['page_title'] = 'Tìm kiếm sản phẩm';
 		$this->data['temp'] = 'frontend/product/index';
@@ -132,7 +132,7 @@ Class Product extends MY_Controller{
         $this->data['publishers'] = $publishers;
         $this->data['categories'] = $categories;
         // echo "<pre>"; print_r($product);
-        $total_rows = $this->db->get_where('products',array('publisher_id'=>$id,'status'=>0))->num_rows();
+        $total_rows = $this->db->get_where('products',array('publisher_id'=>$id,'is_delete'=>0))->num_rows();
 
         $this->data['total_rows'] = $total_rows;
         
@@ -170,7 +170,7 @@ Class Product extends MY_Controller{
         $segment = intval($segment);
         // echo "<pre>";
         // print_r($segment);
-        $productSearch = $this->db->limit($config['per_page'],$segment)->get_where('products',array('publisher_id'=>$id,'status'=>0))->result();
+        $productSearch = $this->db->limit($config['per_page'],$segment)->get_where('products',array('publisher_id'=>$id,'is_delete'=>0))->result();
         $this->data['productSearch']  = $productSearch;
         $this->data['page_title'] = 'Tìm kiếm sản phẩm';
 		$this->data['temp'] = 'frontend/product/index';
@@ -243,7 +243,7 @@ Class Product extends MY_Controller{
         // echo "<pre>";
         // print_r($namesearch);
         if($namesearch){
-            $total_rows = $this->db->like('name',$namesearch)->get_where('products',array('status' =>0))->num_rows();
+            $total_rows = $this->db->like('name',$namesearch)->get_where('products',array('is_delete' =>0))->num_rows();
 
         $this->data['total_rows'] = $total_rows;
         
@@ -281,7 +281,7 @@ Class Product extends MY_Controller{
         $segment = intval($segment);
         // echo "<pre>";
         // print_r($segment);
-            $productSearch= $this->db->limit($config['per_page'],$segment)->like('name',$namesearch)->get_where('products',array('status' =>0))->result();
+            $productSearch= $this->db->limit($config['per_page'],$segment)->like('name',$namesearch)->get_where('products',array('is_delete' =>0))->result();
             $this->data['productSearch']  = $productSearch;
         //     echo "<pre>";
         // print_r($productSearch);

@@ -90,7 +90,7 @@ class Checkout extends MY_Controller{
                     }
                     $this->orderdetail_model->create($data);
                     //tạo ra nội dung thông báo
-                    // $this->cart->destroy();
+                    $this->cart->destroy();
 					$this->session->set_flashdata('message', 'Đặt hàng thành công');
 				}else{
 					$this->session->set_flashdata('message', 'Không thêm được');
