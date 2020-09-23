@@ -4,6 +4,8 @@ Class Product extends MY_Controller{
 	{
 		parent::__construct();
 		$this->load->model('product_model');
+		$this->load->helper('date');
+
 		
 	}
 

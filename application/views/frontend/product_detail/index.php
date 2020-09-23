@@ -61,19 +61,24 @@
                     <div class="panel" id="tab-reviews">
                         <div class="block-reviews" id="block-review">
                             <div class="col-12">
-                            <form class="" method="POST" action="{{route('post.product.review')}}" id="form-review">
-                                    <div class="form-group">
+                         
+                                <?php if($this->session->userdata('user_id_login')):?>
+                                    <form class="" method="POST" action="<?php echo frontend_url('product/addcomment')?>" id="form-review">
+                                        <div class="form-group">
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                        <textarea name="content" id="" cols="5" class="form-control" rows="5" placeholder="Nhập đánh giá sản phẩm (Tối đa 80 ký tự)"></textarea>
+                                        </div>
+                                        <input type="hidden" name="product_id" id="review_value" value="<?php echo $product->id ?>">
                                         
-                                    </div>
-                                    <div class="form-group">
-                                    <textarea name="content" id="" cols="5" class="form-control" rows="5" placeholder="Nhập đánh giá sản phẩm (Tối đa 80 ký tự)"></textarea>
-                                    </div>
-                                    <input type="hidden" name="review" id="review_value" value="5">
-                                    <input type="hidden" name="product_id"  value="{{$product->id}}">
-                                <button type="submit" class="btn btn-success {{Auth::guard('customer')->check() ? "review":"js-login"}}" >
-                                        Gửi đánh giá
-                                     </button>
-                                </form>
+                                        <button type="submit" class="btn btn-success" >
+                                                Gửi đánh giá
+                                        </button>
+                                    </form>
+                                <?php else: ?>
+                                    <span>Bạn cần đăng nhập để có thể bình luận</span>
+                                <?php endif;?>
                             </div>
                         <div class="row review_list" style="<?php echo 'padding-top: 40px'?>">
                             <?php if (isset($comments)): ?>

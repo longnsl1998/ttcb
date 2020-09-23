@@ -4,6 +4,9 @@ Class Product extends MY_Controller{
 	{
 		parent::__construct();
         $this->load->model('product_model');
+        $this->load->model('comment_model');
+			$this->load->helper('date');
+
         $this->load->library('cart');
 		
 	}
@@ -290,4 +293,50 @@ Class Product extends MY_Controller{
 
         }
     }
+    function addcomment(){
+        if(!$this->session->userdata('user_id_login'))
+        {
+            redirect(frontend_url('login'));
+        }
+		//neu ma co du lieu post len thi kiem tra
+		if($this->input->post())
+		{
+			//load thư viện validate dữ liệu
+			$this->load->library('form_validation');
+			$this->load->helper('form');
+
+			$this->form_validation->set_rules('content', 'Nội dung', 'required');
+
+			//nhập liệu chính xác
+			if($this->form_validation->run())
+			{
+				//them vao csdl
+				$content = $this->input->post('content');
+                $product_id = $this->input->post('product_id');
+                $customer_id = $this->session->userdata('user_id_login');
+				//luu du lieu can them
+				$data = array(
+					'content'      => $content,
+					'product_id'      => $product_id,
+                    'customer_id'      => $customer_id,
+                    'created_at' => standard_date('DATE_W3C',time())
+                    
+				);
+				//them moi vao csdl
+				if($this->comment_model->create($data))
+				{
+					//tạo ra nội dung thông báo
+					$this->session->set_flashdata('message', 'Bình luận sản phẩm thành công');
+				}else{
+					$this->session->set_flashdata('message', 'Không thể bình luận sản phẩm');
+				}
+				//chuyen tới trang danh sách
+				redirect(frontend_url('product/search/').$product_id);
+			}
+		}
+
+		$this->data['page_title'] = 'Chi tiết sản phẩm';
+		$this->data['temp'] = 'frontend/product_detail/index';
+		$this->load->view('frontend/layout/index', $this->data);
+	}
 }
